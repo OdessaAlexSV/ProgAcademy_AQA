@@ -1,6 +1,6 @@
-package org.prog;
+package org.prog.classwork;
 
-import org.prog.cars.Car;
+import org.prog.classwork.cars.Car;
 
 public class Main {
 

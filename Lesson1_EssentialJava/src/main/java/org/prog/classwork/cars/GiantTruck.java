@@ -1,4 +1,4 @@
-package org.prog.cars;
+package org.prog.classwork.cars;
 
 public class GiantTruck extends HeavyTruck {
 

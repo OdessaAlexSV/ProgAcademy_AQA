@@ -8,36 +8,60 @@ import java.util.List;
 
 public class Main {
 
+  private static List<Car> cars;
+
   //TODO: add code that verifies that owners with certain name/lastname have car with certain color
   //TODO: * verify that specific Owner has car with color
   public static void main(String[] args) {
     Owner johnKyiv = getOwner("John", "Doe", "Kyiv");
     Owner johnPoltava = getOwner("John", "Doe", "Poltava");
+    Owner johnKherson = getOwner("John", "Doe", "Kherson");
 
+    //red
+    //green
+    // plum
     List<Owner> carOwners = List.of(
-        johnKyiv, //red
+        johnKyiv,    //red
         johnPoltava, //green
+        johnKherson, // plum
         getOwner("Jane", "Doe", "Odesa"),
         getOwner("Jonny", "Depp", "Mykolaiv"),
         getOwner("Aghata", "Kristie", "Dnipro"),
-        getOwner("Alan", "Poe", "Vinnytsia")
+        getOwner("Bruce", "Wales", "NY"),
+        getOwner("Leonel", "Messi", "Maymi"),
+        getOwner("William", "Poe", "Vinnytsia")
     );
 
-    List<Car> cars = List.of(
-        getCar(carOwners.get(0), "AA0000TT", "plum"),
+    cars = List.of(
+        getCar(carOwners.get(0), "AA0000TT", "red"),
         getCar(carOwners.get(1), "AB0011TT", "green"),
-        getCar(carOwners.get(2), "AC0022TT", "red"),
-        getCar(carOwners.get(2), "AB0033TT", "blue"),
-        getCar(carOwners.get(2), "AC0044TT", "cyan"),
-        getCar(carOwners.get(3), "AD0055TT", "white"),
-        getCar(carOwners.get(3), "AE0066TT", "marine"),
-        getCar(carOwners.get(4), "AC0077TT", "gray")
+        getCar(carOwners.get(2), "AB0022TT", "red"),
+        getCar(carOwners.get(3), "AC0033TT", "red"),
+        getCar(carOwners.get(4), "AB0044TT", "blue"),
+        getCar(carOwners.get(5), "AC0055TT", "cyan"),
+        getCar(carOwners.get(6), "AD0066TT", "white"),
+        getCar(carOwners.get(7), "AE0077TT", "marine"),
+        getCar(carOwners.get(8), "AC0088TT", "gray")
     );
 
-    System.out.printf("Does owner %s have a %s color car? - %s",
+
+    String interestedCarColor = "green";
+    String interestedHomeRegistration = "Poltava";
+
+    System.out.printf("Is there a \"%s\" owner who has a \"%s\" colored car? - %s",
         carOwners.get(0).toString(),
-        "green",
-        checkCarOwner("green", carOwners.get(0).name, carOwners.get(0).lastName, cars) ? "True" : "False");
+        interestedCarColor,
+        checkCarOwner(interestedCarColor, carOwners.get(0).name, carOwners.get(0).lastName) ? "True" : "False");
+    System.out.printf("\nHow many owners of \"%s\" exist who have a \"%s\" color car? - %d",
+        carOwners.get(0).toString(),
+        interestedCarColor,
+        countCarOwnerWithSpecificCarColor(interestedCarColor, carOwners.get(0).name, carOwners.get(0).lastName));
+    System.out.printf("\nIs there among \"%s\" owner(s) of the \"%s\" color car living in %s? - %s",
+        johnKyiv,
+        interestedCarColor,
+        interestedHomeRegistration,
+        checkSpecificOwnerHasCarWithColor(interestedCarColor, johnPoltava, interestedHomeRegistration) ? "True" : "False");
+
   }
 
   private static Owner getOwner(String name, String lastName, String homeRegister) {
@@ -46,6 +70,21 @@ public class Main {
     owner.lastName = lastName;
     owner.homeRegister = homeRegister;
     return owner;
+  }
+
+  //TODO: Home work NO * - DONE
+  private static boolean checkCarOwner(String carColor, String name, String lastName) {
+    return cars.stream()
+        .filter(s -> s != null)
+        .anyMatch(s -> s.color.equals(carColor) && s.owner.name.equals(name) && s.owner.lastName.equals(lastName));
+  }
+
+  //TODO: Home work - DONE
+  private static Long countCarOwnerWithSpecificCarColor(String carColor, String name, String lastName) {
+    return cars.stream()
+        .filter(s -> s != null)
+        .filter(s -> s.owner.name.equals(name) && s.owner.lastName.equals(lastName) && s.color.equals(carColor))
+        .count();
   }
 
   //TODO: add color to method and paint car with it - DONE
@@ -58,17 +97,13 @@ public class Main {
   }
 
   //TODO: Home work NO * - DONE
-  private static boolean checkCarOwner(String carColor, String name, String lastName, List<Car> cars) {
+  private static boolean checkSpecificOwnerHasCarWithColor(String carColor, Owner owner, String interestedHomeRegistration) {
     return cars.stream()
-        .anyMatch(s -> s.color.equals(carColor) && s.owner.name.equals(name) && s.owner.lastName.equals(lastName));
-  }
-
-  //TODO: Home work NO *
-  private static boolean checkSpecificOwnerHasCarWithColor(
-      //TODO: whatever params you need
-  ) {
-    return false;
+        .anyMatch(s -> s.color.equals(carColor)
+            && s.owner.equals(owner)
+            && s.owner.homeRegister.equals(interestedHomeRegistration) );
   }
 }
+
 
 

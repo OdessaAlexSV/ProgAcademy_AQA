@@ -9,6 +9,7 @@ import java.util.List;
 public class Main {
 
   private static List<Car> cars;
+  private static List<Owner> carOwners;
 
   //TODO: add code that verifies that owners with certain name/lastname have car with certain color
   //TODO: * verify that specific Owner has car with color
@@ -20,7 +21,7 @@ public class Main {
     //red
     //green
     // plum
-    List<Owner> carOwners = List.of(
+    carOwners = List.of(
         johnKyiv,    //red
         johnPoltava, //green
         johnKherson, // plum
@@ -72,17 +73,16 @@ public class Main {
     return owner;
   }
 
+
   //TODO: Home work NO * - DONE
   private static boolean checkCarOwner(String carColor, String name, String lastName) {
     return cars.stream()
-        .filter(s -> s != null)
         .anyMatch(s -> s.color.equals(carColor) && s.owner.name.equals(name) && s.owner.lastName.equals(lastName));
   }
 
   //TODO: Home work - DONE
   private static Long countCarOwnerWithSpecificCarColor(String carColor, String name, String lastName) {
     return cars.stream()
-        .filter(s -> s != null)
         .filter(s -> s.owner.name.equals(name) && s.owner.lastName.equals(lastName) && s.color.equals(carColor))
         .count();
   }

@@ -46,11 +46,11 @@ public class Main {
     );
 
 
-    String interestedCarColor = "green";
-    String interestedHomeRegistration = "Poltava";
+    String interestedCarColor = "red";
+   // String interestedHomeRegistration = "Poltava";
 
     System.out.printf("Is there a \"%s\" owner who has a \"%s\" colored car? - %s",
-        carOwners.get(0).toString(),
+        johnKyiv.toString(),
         interestedCarColor,
         checkCarOwner(interestedCarColor, carOwners.get(0).name, carOwners.get(0).lastName) ? "True" : "False");
     System.out.printf("\nHow many owners of \"%s\" exist who have a \"%s\" color car? - %d",
@@ -60,8 +60,8 @@ public class Main {
     System.out.printf("\nIs there among \"%s\" owner(s) of the \"%s\" color car living in %s? - %s",
         johnKyiv,
         interestedCarColor,
-        interestedHomeRegistration,
-        checkSpecificOwnerHasCarWithColor(interestedCarColor, johnPoltava, interestedHomeRegistration) ? "True" : "False");
+        johnKyiv.homeRegister,
+        checkSpecificOwnerHasCarWithColor(interestedCarColor, johnKyiv) ? "True" : "False");
 
   }
 
@@ -97,11 +97,9 @@ public class Main {
   }
 
   //TODO: Home work NO * - DONE
-  private static boolean checkSpecificOwnerHasCarWithColor(String carColor, Owner owner, String interestedHomeRegistration) {
+  private static boolean checkSpecificOwnerHasCarWithColor(String carColor, Owner owner) {
     return cars.stream()
-        .anyMatch(s -> s.color.equals(carColor)
-            && s.owner.equals(owner)
-            && s.owner.homeRegister.equals(interestedHomeRegistration) );
+        .anyMatch(s -> s.color.equals(carColor) && s.owner == owner);
   }
 }
 

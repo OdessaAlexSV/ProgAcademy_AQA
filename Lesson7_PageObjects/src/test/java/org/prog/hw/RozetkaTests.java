@@ -26,7 +26,7 @@ public class RozetkaTests {
     ChromeOptions options = new ChromeOptions();
     Map<String, Object> prefs = new HashMap<>();
     prefs.put("profile.default_content_setting_values.cookies", 2);
-    prefs.put("profile.cookie_controls_mode", 2);
+  //prefs.put("profile.cookie_controls_mode", 2);
     options.addArguments("start-maximized");
     options.setExperimentalOption("prefs", prefs);
     WebDriver wd = new ChromeDriver(options);

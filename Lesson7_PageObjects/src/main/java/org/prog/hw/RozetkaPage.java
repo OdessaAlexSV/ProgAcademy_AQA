@@ -11,7 +11,8 @@ import java.time.Duration;
 import java.util.List;
 
 public class RozetkaPage extends AbstractPage {
-
+  private final By INPUT_SEARCH_FIELD_LOCATOR = By.name("search");
+  private final By SEARCH_ITEM_RESULT_TITLE_LOCATOR = By.xpath("//*[@class='goods-tile__heading ng-star-inserted']");
   WebDriverWait wait;
 
   public RozetkaPage(WebDriver driver) {
@@ -20,20 +21,20 @@ public class RozetkaPage extends AbstractPage {
   }
 
   public void setSearchFieldValue(String value) {
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.name("search")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(INPUT_SEARCH_FIELD_LOCATOR));
     WebElement inputSearch = driver.findElement(By.name("search"));
     inputSearch.sendKeys(value);
     inputSearch.sendKeys(Keys.ENTER);
   }
 
   public boolean isSearchResultPresents() {
-    List<WebElement> foundItems = wait.until(ExpectedConditions.
-        presenceOfAllElementsLocatedBy(By.xpath("//*[@class='goods-tile__inner']")));
-    return foundItems.size() > 0;
+    WebElement foundItem = wait.until(ExpectedConditions.
+        visibilityOfElementLocated(SEARCH_ITEM_RESULT_TITLE_LOCATOR));
+    return foundItem.isDisplayed();
   }
 
   public List<WebElement> getSearchItems() {
-    return driver.findElements(By.xpath("//*[@class='goods-tile__title']"));
+    return driver.findElements(SEARCH_ITEM_RESULT_TITLE_LOCATOR);
   }
 
 }

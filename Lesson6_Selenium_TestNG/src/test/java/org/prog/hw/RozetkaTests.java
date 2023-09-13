@@ -2,13 +2,16 @@ package org.prog.hw;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RozetkaTests {
 
@@ -16,7 +19,13 @@ public class RozetkaTests {
 
   @BeforeSuite
   public void setUp() {
-    wd = new ChromeDriver();
+    ChromeOptions options = new ChromeOptions();
+    Map<String, Object> prefs = new HashMap<>();
+    prefs.put("profile.default_content_setting_values.cookies", 2);
+    //prefs.put("profile.cookie_controls_mode", 2);
+    options.addArguments("start-maximized");
+    options.setExperimentalOption("prefs", prefs);
+    wd = new ChromeDriver(options);
   }
 
   @BeforeMethod

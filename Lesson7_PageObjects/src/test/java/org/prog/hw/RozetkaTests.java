@@ -1,21 +1,15 @@
 package org.prog.hw;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.prog.classwork.pages.GoogleCalendarPage;
-import org.prog.classwork.pages.GooglePage;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class RozetkaTests {
 
@@ -45,7 +39,7 @@ public class RozetkaTests {
      Assert.assertTrue(rozetkaPage.isSearchResultPresents(),
         "No any items in the result!");
 
-    List<WebElement> searchResultItems = rozetkaPage.getSearchItems();;
+    List<WebElement> searchResultItems = rozetkaPage.getSearchItems();
 
     Assert.assertTrue(searchResultItems
         .stream()
